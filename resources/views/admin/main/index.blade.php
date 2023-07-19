@@ -87,7 +87,7 @@
                     </div>
                     <!-- ./col -->
                 </div>
-                <!-- /.row -->j
+                <!-- /.row -->
             </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->
