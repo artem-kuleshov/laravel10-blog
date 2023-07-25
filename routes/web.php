@@ -19,6 +19,22 @@ Route::group(['namespace' => 'App\Http\Controllers\Main'], function () {
     Route::get('/', IndexController::class);
 });
 
+Route::group(['namespace' => 'App\Http\Controllers\Cabinet', 'prefix' => 'cabinet', 'middleware' => ['auth', 'verified']], function () {
+    Route::get('/', \App\Http\Controllers\Cabinet\Main\IndexController::class)->name('cabinet.index');
+
+    Route::group(['namespace' => 'Liked', 'prefix' => 'likeds'], function () {
+        Route::get('/', 'IndexController')->name('cabinet.liked.index');
+        Route::delete('/{post}','DeleteController')->name('cabinet.liked.delete');
+    });
+
+    Route::group(['namespace' => 'Comment', 'prefix' => 'comments'], function () {
+        Route::get('/', 'IndexController')->name('cabinet.comment.index');
+        Route::get('/{comment}/edit','EditController')->name('cabinet.comment.edit');
+        Route::patch('/{comment}','UpdateController')->name('cabinet.comment.update');
+        Route::delete('/{comment}','DeleteController')->name('cabinet.comment.delete');
+    });
+});
+
 Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'admin', 'verified']], function () {
     Route::get('/', AdminMainIndexController::class)->name('admin.index');
 
