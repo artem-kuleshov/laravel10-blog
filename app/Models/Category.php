@@ -14,8 +14,8 @@ class Category extends Model
     protected $table = 'categories';
     protected $guarded = false;
 
-    public function posts()
+    public function posts(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        $this->hasMany(Post::class);
+        return $this->hasMany(Post::class);
     }
 }
