@@ -5,8 +5,34 @@
         <div class="container">
             <h1 class="edica-page-title" data-aos="fade-up">{{ $post->title }}</h1>
             <p class="edica-blog-post-meta" data-aos="fade-up" data-aos-delay="200">{{ $date_created->translatedFormat('F') }} {{ $date_created->day }}, {{ $date_created->year }} • {{ $date_created->format('H:i') }}</p>
-            <section class="blog-post-featured-img" data-aos="fade-up" data-aos-delay="300">
+            <section class="blog-post-featured-img mb-1" data-aos="fade-up" data-aos-delay="300">
                 <img src="{{ asset('storage/' . $post->preview_image) }}" alt="{{ $post->title }}" class="w-100">
+            </section>
+            <section class="mb-4">
+                <div class="row">
+                    <div class="col-lg-9 mx-auto" data-aos="fade-up">
+                        <div>
+                            @auth()
+                                <form action="{{ route('post.like.store', $post->id) }}" method="post">
+                                    @csrf
+                                    <span>{{ $post->liked_users_count }}</span>
+                                    <button type="submit" class="border-0 bg-transparent">
+                                        @if(auth()->user()->likedPosts->contains($post->id))
+                                            <i class="fas fa-heart"></i>
+                                        @else
+                                            <i class="far fa-heart"></i>
+                                        @endif
+                                    </button>
+                                </form>
+                            @else
+                                <div>
+                                    <span>{{ $post->liked_users_count }}</span>
+                                    <i class="far fa-heart"></i>
+                                </div>
+                            @endauth
+                        </div>
+                    </div>
+                </div>
             </section>
             <section class="post-content">
                 <div class="row">
