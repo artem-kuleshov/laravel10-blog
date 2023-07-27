@@ -59,7 +59,7 @@
                     </div>
                 </div>
             @endif
-            @if($post->comments()->count() > 0)
+            @if($post->comments->count() > 0)
                 <div class="row mb-5">
                     <div class="col-lg-9 mx-auto">
                         <h2 class="section-title mb-2" data-aos="fade-up">Комментарии ({{ $post->comments()->count() }})</h2>
